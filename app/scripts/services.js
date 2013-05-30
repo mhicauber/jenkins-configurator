@@ -1,7 +1,8 @@
-angular.module('jenkinsConfiguratorServices', [])
+angular.module('jenkinsConfiguratorServices', ['ngResource'])
 
-    .factory('Project', function ($resource) {
-        return $resource('phones/:phoneId.json', {}, {
-            query: {method: 'GET', params: {phoneId: 'phones'}, isArray: true}
+    .factory('Projects', function ($resource) {
+        return $resource('data/project:projectId.json', {}, {
+            query: {method: 'GET', params: {projectId: 's'}, isArray: true}
         })
     });
+

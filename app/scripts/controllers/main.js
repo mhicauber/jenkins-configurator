@@ -1,6 +1,8 @@
 'use strict';
 
 angular.module('jenkinsConfiguratorApp')
+
+
     .controller('LoginCtrl', function ($scope, $http, $route, $routeParams, $location) {
 
         $http.get('data/users.json').success(function (data) {
@@ -21,28 +23,21 @@ angular.module('jenkinsConfiguratorApp')
             }
 
             if (loggedin === true) {
-                alert("login successful");
                 $location.path("/projects");
             } else {
                 alert("username does not exist")
             }
         }
     })
-    /*
-     .factory("User", function ($resource) {
-     return $resource("data/users/:userId.json", {}, {
-     query: {
-     method: "GET",
-     params: {
-     userId: "users"},
-     isArray: true
-     }
-     });
 
-     })
-     */
-    .controller('UserCtrl', function ($scope, $route, $routeParams, $location) {
-        $scope.logoutUser = function () {
-            $location.path("/login");
-        }
+
+    .controller('ProjectsListCtrl', function ($scope, Projects) {
+        $scope.projects = Projects.query();
+    })
+
+
+    .controller('ProjectDetailsCtrl', function ($scope, $routeParams, Projects) {
+        console.log("project id : " + $routeParams.projectId);
+        $scope.project = Projects.get({projectId: $routeParams.projectId}, function (phone) {
+        })
     });
